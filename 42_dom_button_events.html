@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Paragraph Events</title>
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    padding: 40px;
+}
+p {
+    font-size: 12pt;
+    padding: 20px;
+    border: 1px solid black;
+}
+button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>JavaScript Button Events</h2>
+
+<p id="paragraph">
+    This is a sample paragraph. Use different buttons to perform
+    different JavaScript events.
+</p>
+
+<button onclick="changeBackground()">Change Background</button>
+<button onclick="changeParagraphBackground()">Change Paragraph Background</button>
+<button onclick="hideParagraph()">Hide Paragraph</button>
+<button onclick="showParagraph()">Show Paragraph</button>
+<button onclick="increaseFont()">Increase Font Size by 2pt</button>
+<button onclick="decreaseFont()">Decrease Font Size by 2pt</button>
+<button onclick="resetFont()">Reset Font into 12pt</button>
+<button onclick="changeTextColor()">Change Text Color</button>
+
+<script>
+let paragraph = document.getElementById("paragraph");
+let fontSize = 12;
+
+function changeBackground() {
+    document.body.style.backgroundColor = "lightblue";
+}
+
+function changeParagraphBackground() {
+    paragraph.style.backgroundColor = "yellow";
+}
+
+function hideParagraph() {
+    paragraph.style.display = "none";
+}
+
+function showParagraph() {
+    paragraph.style.display = "block";
+}
+
+function increaseFont() {
+    fontSize += 2;
+    paragraph.style.fontSize = fontSize + "pt";
+}
+
+function decreaseFont() {
+    if (fontSize > 2) fontSize -= 2;
+    paragraph.style.fontSize = fontSize + "pt";
+}
+
+function resetFont() {
+    fontSize = 12;
+    paragraph.style.fontSize = "12pt";
+}
+
+function changeTextColor() {
+    paragraph.style.color = "red";
+}
+</script>
+
+</body>
+</html>

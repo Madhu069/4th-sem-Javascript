@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arithmetic Calculator</title>
+</head>
+<body>
+    <h2>Addition, Subtraction, Multiplication and Division</h2>
+
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+    <button onclick="calculate()">Calculate</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+    function calculate() {
+        let a = Number(document.getElementById("num1").value);
+        let b = Number(document.getElementById("num2").value);
+
+        document.getElementById("result").innerHTML =
+            "Addition: " + (a + b) + "<br>" +
+            "Subtraction: " + (a - b) + "<br>" +
+            "Multiplication: " + (a * b) + "<br>" +
+            "Division: " + (b !== 0 ? a / b : "Cannot divide by zero");
+    }
+    </script>
+</body>
+</html>

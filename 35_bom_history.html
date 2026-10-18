@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><title>BOM History</title></head>
+<body>
+
+<h2>Browser History Navigation</h2>
+
+<button onclick="goBack()">Previous Page</button>
+<button onclick="goForward()">Next Page</button>
+<button onclick="goTwoPages()">Go Back 2 Pages</button>
+
+<p id="historyLength"></p>
+
+<script>
+function updateHistoryLength() {
+    document.getElementById("historyLength").textContent =
+        "History Length: " + history.length;
+}
+
+function goBack() {
+    history.back();
+}
+
+function goForward() {
+    history.forward();
+}
+
+function goTwoPages() {
+    history.go(-2);
+}
+
+updateHistoryLength();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Digital Clock</title>
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+}
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.time-box {
+    padding: 30px;
+    margin: 10px;
+    font-size: 50px;
+    border-radius: 10px;
+    min-width: 100px;
+    background: #eee;
+}
+.colon {
+    font-size: 50px;
+}
+</style>
+</head>
+<body>
+
+<h1>DIGITAL CLOCK</h1>
+
+<div class="clock">
+    <div class="time-box" id="hours">00</div>
+    <div class="colon">:</div>
+    <div class="time-box" id="minutes">00</div>
+    <div class="colon">:</div>
+    <div class="time-box" id="seconds">00</div>
+</div>
+
+<script>
+function showTime() {
+    let date = new Date();
+
+    let hours = String(date.getHours()).padStart(2, "0");
+    let minutes = String(date.getMinutes()).padStart(2, "0");
+    let seconds = String(date.getSeconds()).padStart(2, "0");
+
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+showTime();
+setInterval(showTime, 1000);
+</script>
+
+</body>
+</html>

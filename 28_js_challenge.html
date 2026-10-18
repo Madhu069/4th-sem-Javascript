@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS Challenge</title>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1 id="year">JS Challenge 2026</h1>
+    <h2>7 Days of JS Challenge</h2>
+    <p id="datetime"></p>
+
+    <ul>
+        <li>Python Challenge Done</li>
+        <li>JavaScript Challenge Ongoing</li>
+        <li>React Challenge Coming</li>
+        <li>Full Stack Challenge Coming</li>
+        <li>Data Analysis Challenge Coming</li>
+        <li>React Native Challenge Coming</li>
+        <li>Machine Learning Challenge Coming</li>
+    </ul>
+</div>
+
+<script>
+function randomColor() {
+    return "#" + Math.floor(Math.random() * 16777215)
+        .toString(16).padStart(6, "0");
+}
+
+setInterval(() => {
+    document.getElementById("year").style.color = randomColor();
+}, 1000);
+
+setInterval(() => {
+    let dateElement = document.getElementById("datetime");
+    dateElement.textContent = new Date().toString();
+    dateElement.style.backgroundColor = randomColor();
+}, 1000);
+
+document.querySelectorAll("li").forEach(challenge => {
+    if (challenge.textContent.includes("Done")) {
+        challenge.style.backgroundColor = "green";
+    } else if (challenge.textContent.includes("Ongoing")) {
+        challenge.style.backgroundColor = "yellow";
+    } else {
+        challenge.style.backgroundColor = "red";
+    }
+
+    challenge.style.padding = "10px";
+    challenge.style.margin = "5px";
+});
+</script>
+
+</body>
+</html>

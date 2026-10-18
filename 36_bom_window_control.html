@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>BOM Window Control</title></head>
+<body>
+
+<h2>Browser Window Control</h2>
+
+<button onclick="openWindow()">Open Window</button>
+<button onclick="closeWindow()">Close Window</button>
+<button onclick="resizeWindow()">Resize Window</button>
+<button onclick="showWindowInfo()">Show Window Info</button>
+
+<div id="result"></div>
+
+<script>
+let newWindow = null;
+
+function openWindow() {
+    newWindow = window.open("", "_blank", "width=500,height=400");
+
+    if (newWindow) {
+        newWindow.document.write("<h1>New Window</h1>");
+    } else {
+        alert("Popup was blocked by the browser.");
+    }
+}
+
+function closeWindow() {
+    if (newWindow && !newWindow.closed) {
+        newWindow.close();
+    }
+}
+
+function resizeWindow() {
+    if (newWindow && !newWindow.closed) {
+        newWindow.resizeTo(800, 600);
+    }
+}
+
+function showWindowInfo() {
+    document.getElementById("result").innerHTML =
+        "<p>Inner Width: " + window.innerWidth + "</p>" +
+        "<p>Inner Height: " + window.innerHeight + "</p>" +
+        "<p>Outer Width: " + window.outerWidth + "</p>" +
+        "<p>Outer Height: " + window.outerHeight + "</p>";
+}
+
+showWindowInfo();
+</script>
+
+</body>
+</html>

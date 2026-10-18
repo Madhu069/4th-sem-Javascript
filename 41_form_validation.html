@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Form Validation</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+.container {
+    width: 500px;
+    max-width: 95%;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+h2 {
+    text-align: center;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.gender {
+    width: auto;
+}
+.error {
+    color: red;
+    font-size: 13px;
+    display: block;
+    margin-top: 4px;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background: green;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Registration Form</h2>
+
+<form id="myForm">
+
+<div class="form-group">
+<label>Name</label>
+<input type="text" id="name">
+<span class="error" id="nameError"></span>
+</div>
+
+<div class="form-group">
+<label>Address</label>
+<textarea id="address"></textarea>
+<span class="error" id="addressError"></span>
+</div>
+
+<div class="form-group">
+<label>Username</label>
+<input type="text" id="username">
+<span class="error" id="usernameError"></span>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="text" id="email">
+<span class="error" id="emailError"></span>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" id="password">
+<span class="error" id="passwordError"></span>
+</div>
+
+<div class="form-group">
+<label>Website</label>
+<input type="text" id="website">
+<span class="error" id="websiteError"></span>
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input type="text" id="phone">
+<span class="error" id="phoneError"></span>
+</div>
+
+<div class="form-group">
+<label>Gender</label>
+<input type="radio" name="gender" value="Male" class="gender"> Male
+<input type="radio" name="gender" value="Female" class="gender"> Female
+<span class="error" id="genderError"></span>
+</div>
+
+<div class="form-group">
+<label>Course</label>
+<select id="course">
+<option value="">Select Course</option>
+<option value="BCA">BCA</option>
+<option value="BIM">BIM</option>
+<option value="CSIT">BSc CSIT</option>
+<option value="BIT">BIT</option>
+</select>
+<span class="error" id="courseError"></span>
+</div>
+
+<button type="submit">Submit</button>
+
+</form>
+</div>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    document.querySelectorAll(".error").forEach(error => {
+        error.textContent = "";
+    });
+
+    let valid = true;
+
+    // Name: non-empty and letters/spaces only
+    let name = document.getElementById("name").value.trim();
+    if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        valid = false;
+    } else if (!/^[A-Za-z\s]+$/.test(name)) {
+        document.getElementById("nameError").textContent =
+            "Name should not contain numbers.";
+        valid = false;
+    }
+
+    // Address
+    let address = document.getElementById("address").value.trim();
+    if (address === "") {
+        document.getElementById("addressError").textContent =
+            "Address is required.";
+        valid = false;
+    }
+
+    // Username: letters, numbers and underscore only
+    let username = document.getElementById("username").value.trim();
+    if (username === "") {
+        document.getElementById("usernameError").textContent =
+            "Username is required.";
+        valid = false;
+    } else if (!/^[A-Za-z0-9_]+$/.test(username)) {
+        document.getElementById("usernameError").textContent =
+            "Only letters, numbers and underscore are allowed.";
+        valid = false;
+    }
+
+    // Email: required and must contain @
+    let email = document.getElementById("email").value.trim();
+    if (email === "") {
+        document.getElementById("emailError").textContent =
+            "Email is required.";
+        valid = false;
+    } else if (!email.includes("@")) {
+        document.getElementById("emailError").textContent =
+            "Email must contain @.";
+        valid = false;
+    }
+
+    // Password: 8+, uppercase, lowercase, digit, special character
+    let password = document.getElementById("password").value;
+    let passwordPattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if (password === "") {
+        document.getElementById("passwordError").textContent =
+            "Password is required.";
+        valid = false;
+    } else if (!passwordPattern.test(password)) {
+        document.getElementById("passwordError").textContent =
+            "Password needs 8+ characters, uppercase, lowercase, number and special character.";
+        valid = false;
+    }
+
+    // Website
+    let website = document.getElementById("website").value.trim();
+    if (website !== "" &&
+        !/^(https?:\/\/).+/i.test(website)) {
+        document.getElementById("websiteError").textContent =
+            "Website should start with http:// or https://.";
+        valid = false;
+    }
+
+    // Phone: 10 digits, starts 98/97/96
+    let phone = document.getElementById("phone").value.trim();
+    if (phone === "") {
+        document.getElementById("phoneError").textContent =
+            "Phone number is required.";
+        valid = false;
+    } else if (!/^(98|97|96)[0-9]{8}$/.test(phone)) {
+        document.getElementById("phoneError").textContent =
+            "Phone must be 10 digits and start with 98, 97 or 96.";
+        valid = false;
+    }
+
+    // Gender
+    let gender = document.querySelector('input[name="gender"]:checked');
+    if (!gender) {
+        document.getElementById("genderError").textContent =
+            "Please select gender.";
+        valid = false;
+    }
+
+    // Course
+    let course = document.getElementById("course").value;
+    if (course === "") {
+        document.getElementById("courseError").textContent =
+            "Please select a course.";
+        valid = false;
+    }
+
+    if (valid) {
+        alert("Form Submitted Successfully!");
+        this.reset();
+    }
+});
+</script>
+
+</body>
+</html>

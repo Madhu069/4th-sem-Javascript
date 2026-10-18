@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Manipulation</title>
+</head>
+<body>
+
+<p id="p1">First Paragraph</p>
+<p id="p2">Second Paragraph</p>
+<p id="p3">Third Paragraph</p>
+<p id="p4">Fourth Paragraph</p>
+
+<script>
+let firstParagraph = document.querySelector("p");
+console.log(firstParagraph);
+
+let p1 = document.querySelector("#p1");
+let p2 = document.querySelector("#p2");
+let p3 = document.querySelector("#p3");
+let p4 = document.querySelector("#p4");
+
+let paragraphs = document.querySelectorAll("p");
+console.log(paragraphs);
+
+paragraphs.forEach(p => console.log(p.textContent));
+
+p4.textContent = "Fourth Paragraph";
+
+paragraphs.forEach((p, index) => {
+    p.setAttribute("class", "paragraph");
+    p.setAttribute("data-number", index + 1);
+
+    p.style.background = "#eee";
+    p.style.border = "1px solid black";
+    p.style.fontSize = "20px";
+    p.style.fontFamily = "Arial";
+    p.style.padding = "10px";
+
+    if (index === 0 || index === 2) {
+        p.style.color = "green";
+    } else {
+        p.style.color = "red";
+    }
+});
+</script>
+
+</body>
+</html>

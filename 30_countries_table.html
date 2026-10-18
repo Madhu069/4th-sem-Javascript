@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Countries Table</title>
+<style>
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<table id="countryTable"></table>
+
+<script>
+const countries = [
+"Afghanistan", "Albania", "Algeria", "Argentina",
+"Australia", "Austria", "Bangladesh", "Belgium",
+"Brazil", "Canada", "China", "Denmark",
+"Egypt", "Finland", "France", "Germany",
+"India", "Indonesia", "Italy", "Japan",
+"Nepal", "Pakistan", "Portugal", "Russia",
+"Spain", "Sweden", "Switzerland", "Thailand",
+"UK", "USA", "Vietnam", "Mexico",
+"Norway", "Poland", "Qatar", "Romania",
+"Saudi Arabia", "Singapore", "South Korea", "Sri Lanka",
+"Turkey", "Ukraine", "UAE", "Malaysia",
+"New Zealand", "Netherlands", "Greece", "Chile",
+"Peru", "Kenya"
+];
+
+let table = document.getElementById("countryTable");
+
+for (let i = 0; i < countries.length; i += 6) {
+    let row = table.insertRow();
+
+    for (let j = 0; j < 6 && i + j < countries.length; j++) {
+        let cell = row.insertCell();
+        cell.textContent = countries[i + j];
+    }
+}
+</script>
+
+</body>
+</html>

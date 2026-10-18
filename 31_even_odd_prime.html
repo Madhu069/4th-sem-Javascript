@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Even Odd Prime</title>
+<style>
+.number {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+}
+</style>
+</head>
+<body>
+
+<input type="number" id="number" placeholder="Enter number">
+<button onclick="generate()">Generate</button>
+<div id="result"></div>
+
+<script>
+function isPrime(num) {
+    if (num < 2) return false;
+
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+    }
+
+    return true;
+}
+
+function generate() {
+    let n = Number(document.getElementById("number").value);
+    let result = document.getElementById("result");
+    result.innerHTML = "";
+
+    for (let i = 1; i <= n; i++) {
+        let span = document.createElement("span");
+        span.textContent = i;
+        span.className = "number";
+
+        if (isPrime(i)) {
+            span.style.backgroundColor = "red";
+        } else if (i % 2 === 0) {
+            span.style.backgroundColor = "green";
+        } else {
+            span.style.backgroundColor = "yellow";
+        }
+
+        result.appendChild(span);
+    }
+}
+</script>
+
+</body>
+</html>

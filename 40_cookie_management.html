@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cookie Management</title>
+<style>
+body {
+    font-family: Arial;
+    padding: 30px;
+}
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+input {
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+}
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+}
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background: #ddd;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Cookie Management System</h2>
+
+<input type="text" id="key" placeholder="Enter Cookie Key">
+<input type="text" id="value" placeholder="Enter Cookie Value">
+
+<br>
+
+<button onclick="setCookie()">Store Cookie</button>
+<button onclick="getCookie()">Read Cookie</button>
+<button onclick="deleteCookie()">Delete Cookie</button>
+<button onclick="deleteAllCookies()">Delete All</button>
+<button onclick="displayCookies()">Display Cookies</button>
+
+<h3 id="result"></h3>
+
+<table>
+<thead>
+<tr>
+    <th>Cookie Key</th>
+    <th>Cookie Value</th>
+</tr>
+</thead>
+<tbody id="cookieTable"></tbody>
+</table>
+</div>
+
+<script>
+function setCookie() {
+    let key = document.getElementById("key").value.trim();
+    let value = document.getElementById("value").value;
+
+    if (!key || !value) {
+        alert("Please enter key and value.");
+        return;
+    }
+
+    document.cookie =
+        encodeURIComponent(key) + "=" +
+        encodeURIComponent(value) +
+        "; expires=Fri, 31 Dec 2030 23:59:59 UTC; path=/";
+
+    displayCookies();
+}
+
+function getCookie() {
+    let key = document.getElementById("key").value.trim();
+    let found = null;
+
+    document.cookie.split(";").forEach(item => {
+        let [k, ...parts] = item.trim().split("=");
+        if (decodeURIComponent(k) === key) {
+            found = decodeURIComponent(parts.join("="));
+        }
+    });
+
+    document.getElementById("result").textContent =
+        found === null ? "Cookie not found" : "Value: " + found;
+}
+
+function displayCookies() {
+    let table = document.getElementById("cookieTable");
+    table.innerHTML = "";
+
+    if (!document.cookie) {
+        table.innerHTML =
+            "<tr><td colspan='2'>No Cookies Found</td></tr>";
+        return;
+    }
+
+    document.cookie.split(";").forEach(item => {
+        let [k, ...parts] = item.trim().split("=");
+        let key = decodeURIComponent(k);
+        let value = decodeURIComponent(parts.join("="));
+
+        let row = table.insertRow();
+        row.insertCell().textContent = key;
+        row.insertCell().textContent = value;
+    });
+}
+
+function deleteCookie() {
+    let key = document.getElementById("key").value.trim();
+
+    if (!key) {
+        alert("Enter cookie key.");
+        return;
+    }
+
+    document.cookie =
+        encodeURIComponent(key) +
+        "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+    displayCookies();
+}
+
+function deleteAllCookies() {
+    if (!document.cookie) {
+        displayCookies();
+        return;
+    }
+
+    document.cookie.split(";").forEach(item => {
+        let key = item.trim().split("=")[0];
+
+        document.cookie =
+            key + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    });
+
+    displayCookies();
+}
+</script>
+
+</body>
+</html>
